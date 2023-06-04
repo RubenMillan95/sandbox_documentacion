@@ -28,6 +28,12 @@ class App{
                 res.send("Bienvenidos a typescript")
             }
         )
+        this.app.post(
+            "/paciente",
+            (req:Request, res:Response)=>{
+                res.send("Bienvenidos a typescript")
+            }
+        )
     }
    public start():void{
     this.server=this.app.listen(

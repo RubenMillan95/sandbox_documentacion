@@ -13,7 +13,7 @@ export const swaggerOptions={
         },
         servers:[
             { 
-                url:"http:localhost:3000",
+                url:"http://localhost:3000",
                 description:"Servidor Local de Documentación"
             }
         ]
