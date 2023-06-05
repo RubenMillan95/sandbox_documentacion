@@ -2,6 +2,7 @@ import swaggerUI from 'swagger-ui-express'
 import { swaggerSpec } from './swagger.conf'
 
 import express,{Application, Request, Response }from 'express'
+import {PrismaClient} from '@prisma/client'
 
 
 /**
@@ -15,6 +16,7 @@ class App{
 	//Atributos
 	public app:any
 	private server:any
+	private prismaClient:PrismaClient
 
 	constructor(){
 		this.app=express()
@@ -24,6 +26,8 @@ class App{
 			swaggerUI.serve,
 			swaggerUI.setup(swaggerSpec)
 		)
+        this.prismaClient=new PrismaClient()  
+
 		this.routes()
 	}
 
@@ -36,11 +40,48 @@ class App{
 			(req:Request, res:Response)=>{
 				res.send('Bienvenidos a typescript')
 			}
+		) 
+
+		this.app.get(
+			'/pacientes',async (req:Request, res:Response)=>{
+			const pacientes=await this.prismaClient.paciente.findMany() 
+				res.json(pacientes)
+			}
 		)
+
+
 		this.app.post(
-			'/paciente',
-			(req:Request, res:Response)=>{
-				res.send('Bienvenidos a typescript')
+			'/crear_paciente',
+			async (req:Request, res:Response)=>{
+				try{
+
+				const{
+					cedula,
+					nombre,
+					apellido,
+					fecha,
+					telefono
+				}=req.body
+
+				const fechaNacimiento= new Date(fecha)
+
+				const paciente=await this.prismaClient.paciente.create(
+					{
+						data:{cedula,
+							nombre,
+							apellido,
+							fechaNacimiento,
+							telefono}
+					}
+				)
+
+
+
+				res.json(req.body)
+			}catch(e:any){
+				res.status(400)
+				res.json({error:e.message})
+			}
 			}
 		)
 	}
