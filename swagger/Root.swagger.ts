@@ -11,7 +11,7 @@ export default{
  *       type: string
  *       content:
  *       text/plain:
- *       example:"Bienvenidos a typescript"
+ *       example:'Bienvenidos a typescript'
  *       
  *         
  */
