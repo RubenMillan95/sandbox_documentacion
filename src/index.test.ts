@@ -7,7 +7,7 @@ describe(
 	'GET /',
     ()=>{
 
-        var app:App
+        let app:App
         beforeAll(
             ()=>{
                 app=new App()
@@ -16,7 +16,9 @@ describe(
         )
 
         afterAll(
+            ()=>{
             app.close()
+            }
         )
 
         test(
@@ -24,7 +26,7 @@ describe(
             async ()=>{
                 const res=await request(app.app).get('/')
                 expect (res.statusCode).toEqual(200)
-                expect (res.text).toEqual('Bienvenido a typescript')
+                expect (res.text).toEqual('Bienvenidos a typescript')
             }
         )
 
