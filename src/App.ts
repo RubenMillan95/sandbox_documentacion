@@ -5,6 +5,7 @@ import express,{Application, Request, Response }from 'express'
 import PacienteRouter from  './routes/Paciente.routes'
 import MedicoRouter from './routes/Medico.routes'
 import FormularioRouter from './routes/Formulario.routes'
+import cors from 'cors'
 
 /**
  * Clase principal de la API. Define las rutas de la API
@@ -28,7 +29,7 @@ class App{
 			swaggerUI.setup(swaggerSpec)
 		)
           
-
+        this.app.use(cors())
 		this.routes()
 	}
 
