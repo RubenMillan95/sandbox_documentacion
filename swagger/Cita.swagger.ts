@@ -11,7 +11,7 @@ export default {
      *        200:
      *           descripcion: Has obtenido un mensaje de prueba
      *           type: string
-     *           content: Mensaje de ejemplo
+     *           content: Example message
      *           text/plain:
      *           ejemplo: "Bienvenidos a typescript"
      * 
